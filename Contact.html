@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - PM Surya Ghar Yojana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #f9fafb;
+            --bg-secondary: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --header-bg: #1e40af;
+            --accent-color: #f59e0b;
+            --input-bg: #ffffff;
+            --input-text: #111827;
+            --input-border: #e5e7eb;
+        }
+
+        .dark-mode {
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --border-color: #374151;
+            --header-bg: #1e3a8a;
+            --accent-color: #d97706;
+            --input-bg: #374151;
+            --input-text: #f9fafb;
+            --input-border: #4b5563;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .bg-white {
+            background-color: var(--bg-secondary);
+        }
+
+        .text-gray-700, .text-gray-600, .text-gray-500, .text-gray-400 {
+            color: var(--text-secondary);
+        }
+
+        .border-gray-300 {
+            border-color: var(--border-color);
+        }
+
+        .bg-gray-100 {
+            background-color: var(--bg-primary);
+        }
+
+        .bg-gray-50 {
+            background-color: var(--bg-primary);
+        }
+
+        .bg-gray-200 {
+            background-color: var(--border-color);
+        }
+
+        .bg-blue-800 {
+            background-color: var(--header-bg);
+        }
+
+        .bg-yellow-500 {
+            background-color: var(--accent-color);
+        }
+
+        .dark-mode .bg-white {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        .dark-mode .bg-gray-50 {
+            background-color: var(--bg-primary) !important;
+        }
+
+        .dark-mode .bg-gray-100 {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        .dark-mode .text-blue-800 {
+            color: #93c5fd !important;
+        }
+
+        .dark-mode .hover\:bg-gray-100:hover {
+            background-color: var(--bg-primary) !important;
+        }
+
+        .dark-mode header {
+            background: linear-gradient(135deg, var(--header-bg), #1e3a8a) !important;
+        }
+
+        .dark-mode .bg-gradient-to-r {
+            background-image: linear-gradient(to right, var(--header-bg), #1e3a8a) !important;
+        }
+
+        .input-field {
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid var(--input-border);
+        }
+
+        .input-label {
+            color: var(--text-primary);
+        }
+
+        .info-box {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .blue-button {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .blue-button:hover {
+            background-color: #2563eb;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Success and error message styles */
+        .message {
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Floating Home Button */
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 50;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .floating-home-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .floating-home-btn i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .floating-home-btn.pulse {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(59, 130, 246, 0.8);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            }
+        }
+
+        /* Glowing Title */
+        .glowing-title {
+            background: linear-gradient(90deg, 
+                #00ffff, #33ffff, #66ffff, #e0ffff, 
+                #00ffff, #33ffff, #66ffff, #e0ffff,
+                #00ffff, #33ffff, #66ffff, #e0ffff,
+                #00ffff, #33ffff, #66ffff, #e0ffff,
+                #00ffff, #33ffff, #66ffff, #e0ffff, 
+                #00ffff, #33ffff, #66ffff, #e0ffff
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: colorShift 16s ease infinite, glowPulse 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        @keyframes colorShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 50%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glowPulse {
+            0% { 
+                transform: scale(1);
+            }
+            100% { 
+                transform: scale(1.02);
+            }
+        }
+
+        /* Pulsating Border Animation */
+        @keyframes pulsatingBorder {
+            0% {
+                box-shadow: 0 0 0 3px #ff0000;
+            }
+            50% {
+                box-shadow: 0 0 0 5px #00ffff;
+            }
+            100% {
+                box-shadow: 0 0 0 3px #ff0000;
+            }
+        }
+
+        .animated-border {
+            animation: pulsatingBorder 1.5s ease-in-out infinite;
+            border-radius: 12px;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon" id="darkModeIcon"></i>
+    </div>
+
+    <!-- Navigation Header -->
+    <div id="header"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-2xl p-8 mb-8 shadow-lg">
+            <div class="max-w-2xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Contact Our Solar Experts</h2>
+                <p class="text-lg mb-6">Have questions about the PM Surya Ghar Yojana scheme or need assistance with solar installation verification? Our team is here to help.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contactForm" class="bg-yellow-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition flex items-center">
+                        <i class="fas fa-envelope mr-2"></i> Send Message
+                    </a>
+                    <a href="tel:18001803333" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center">
+                        <i class="fas fa-phone mr-2"></i> Call Now
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white rounded-xl shadow-lg p-6 mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center glowing-title">Get In Touch</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Our solar experts are ready to assist you with any questions about the PM Surya Ghar Yojana scheme, subsidy applications, or solar installation verification.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-10">
+                <div class="lg:w-1/2">
+                    <!-- Success and Error Messages -->
+                    <div id="successMessage" class="message success">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>Thank you for your message! We'll get back to you soon.</span>
+                    </div>
+                    <div id="errorMessage" class="message error">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <span>There was an error sending your message. Please try again.</span>
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div id="loadingIndicator" class="loading">
+                        <i class="fas fa-spinner fa-spin text-blue-800 mr-2"></i>
+                        <span>Sending your message...</span>
+                    </div>
+                    
+                    <form id="contactForm" method="POST" action="process.php" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block input-label mb-2">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 input-field" placeholder="Your first name" required>
+                            </div>
+                            <div>
+                                <label for="lastName" class="block input-label mb-2">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 input-field" placeholder="Your last name" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block input-label mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 input-field" placeholder="Your email address" required>
+                        </div>
+                        <div>
+                            <label for="contactNo" class="block input-label mb-2">Contact Number</label>
+                            <input type="tel" id="contactNo" name="contactNo" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 input-field" placeholder="Your contact number" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block input-label mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 input-field" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full blue-button text-white px-6 py-3 rounded-lg font-semibold transition">Send Message</button>
+                    </form>
+                </div>
+                <div class="lg:w-1/2 bg-gray-50 p-8 rounded-lg info-box">
+                    <h3 class="text-2xl font-bold mb-6 section-header">Contact Information</h3>    
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-800 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold input-label">Our Office</h4>
+                                <p class="text-gray-600">
+                                    Ministry of New and Renewable Energy<br>
+                                    Block No. 14, CGO Complex, Lodhi Road<br>
+                                    New Delhi - 110003, India
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone text-blue-800 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold input-label">Helpline</h4>
+                                <p class="text-gray-600">1800-180-3333 (Toll-Free)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-blue-800 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold input-label">Email</h4>
+                                <p class="text-gray-600">support@suryaghar.gov.in</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-blue-800 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold input-label">Working Hours</h4>
+                                <p class="text-gray-600">Monday - Saturday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-center section-header">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div class="border border-gray-300 rounded-lg p-4 info-box">
+                    <h3 class="font-semibold text-lg mb-2 input-label">What is the PM Surya Ghar Yojana scheme?</h3>
+                    <p class="text-gray-600">PM Surya Ghar Yojana is a government initiative to promote rooftop solar installation in residential areas by providing subsidies and financial assistance.</p>
+                </div>
+                <div class="border border-gray-300 rounded-lg p-4 info-box">
+                    <h3 class="font-semibold text-lg mb-2 input-label">How can I check if my rooftop is suitable for solar installation?</h3>
+                    <p class="text-gray-600">Use our AI-powered verification tool to analyze your rooftop and check eligibility for subsidies under the scheme.</p>
+                </div>
+                <div class="border border-gray-300 rounded-lg p-4 info-box">
+                    <h3 class="font-semibold text-lg mb-2 input-label">What documents are required for subsidy application?</h3>
+                    <p class="text-gray-600">You'll need proof of identity, address proof, property ownership documents, and electricity bill copies. Our team can guide you through the process.</p>
+                </div>
+                <div class="border border-gray-300 rounded-lg p-4 info-box">
+                    <h3 class="font-semibold text-lg mb-2 input-label">How long does the verification process take?</h3>
+                    <p class="text-gray-600">Our AI analysis typically takes 2-3 minutes. The complete subsidy approval process may take 2-4 weeks depending on your location and documentation.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <div id="footer"></div>
+<script>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        });
+</script>
+
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn pulse">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+        
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Contact Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            loadingIndicator.style.display = 'block';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Simulate form submission (replace with actual API call)
+            setTimeout(() => {
+                // In a real implementation, you would make an API call here
+                // For demo purposes, we'll simulate a successful submission
+                const isSuccess = Math.random() > 0.2; // 80% success rate for demo
+                
+                if (isSuccess) {
+                    successMessage.style.display = 'block';
+                    document.getElementById('contactForm').reset();
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+                
+                // Reset button state
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Send Message';
+                loadingIndicator.style.display = 'none';
+                
+                // Scroll to message
+                if (isSuccess) {
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 1500);
+        });
+
+        // Show messages from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const message = urlParams.get('message');
+
+        if (status && message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = status === 'success' ? 'message success' : 'message error';
+            messageDiv.innerHTML = `<i class="fas ${status === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'} mr-2"></i><span>${decodeURIComponent(message)}</span>`;
+            
+            // Insert at the top of the form
+            const form = document.getElementById('contactForm');
+            form.parentNode.insertBefore(messageDiv, form);
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
