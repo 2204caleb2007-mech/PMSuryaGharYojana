@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Process - PM Surya Ghar Yojana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #f9fafb;
+            --bg-secondary: #ffffff;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --header-bg: #1e40af;
+            --accent-color: #f59e0b;
+            --input-bg: #ffffff;
+            --input-text: #111827;
+            --input-border: #e5e7eb;
+        }
+
+        .dark-mode {
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --border-color: #374151;
+            --header-bg: #1e3a8a;
+            --accent-color: #d97706;
+            --input-bg: #374151;
+            --input-text: #f9fafb;
+            --input-border: #4b5563;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .bg-white {
+            background-color: var(--bg-secondary);
+        }
+
+        .text-gray-700, .text-gray-600, .text-gray-500, .text-gray-400 {
+            color: var(--text-secondary);
+        }
+
+        .border-gray-300 {
+            border-color: var(--border-color);
+        }
+
+        .bg-gray-100 {
+            background-color: var(--bg-primary);
+        }
+
+        .bg-gray-50 {
+            background-color: var(--bg-primary);
+        }
+
+        .bg-gray-200 {
+            background-color: var(--border-color);
+        }
+
+        .bg-blue-800 {
+            background-color: var(--header-bg);
+        }
+
+        .bg-yellow-500 {
+            background-color: var(--accent-color);
+        }
+
+        /* Dark mode overrides */
+        .dark-mode .bg-white {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        .dark-mode .bg-gray-50 {
+            background-color: var(--bg-primary) !important;
+        }
+
+        .dark-mode .bg-gray-100 {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        .dark-mode .text-blue-800 {
+            color: #93c5fd !important;
+        }
+
+        .dark-mode .hover\:bg-gray-100:hover {
+            background-color: var(--bg-primary) !important;
+        }
+
+        .dark-mode header {
+            background: linear-gradient(135deg, var(--header-bg), #1e3a8a) !important;
+        }
+
+        .dark-mode .bg-gradient-to-r {
+            background-image: linear-gradient(to right, var(--header-bg), #1e3a8a) !important;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .input-field {
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid var(--input-border);
+        }
+
+        .input-label {
+            color: var(--text-primary);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+
+        .solar-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .flowchart-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flow-step {
+            position: relative;
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background-color: #3b82f6;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-connector {
+            position: absolute;
+            left: 50%;
+            bottom: -40px;
+            width: 2px;
+            height: 40px;
+            background-color: #3b82f6;
+            transform: translateX(-50%);
+        }
+
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #3b82f6;
+        }
+
+        .step-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #3b82f6;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .back-button {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .flow-step {
+                padding: 15px;
+            }
+            
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .step-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon" id="darkModeIcon"></i>
+    </div>
+
+    <!-- Navigation Header -->
+    <div id="header"></div>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Back Button -->
+        <div class="mb-8">
+            <a href="dex.html" class="back-button">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Page Title -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">Application Process</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Follow these simple steps to apply for the PM Surya Ghar Yojana and start your journey towards free solar electricity.
+            </p>
+        </div>
+
+        <!-- Flowchart Section -->
+        <section class="mb-12">
+            <div class="flowchart-container">
+                <!-- Step 1 -->
+                <div class="flow-step">
+                    <div class="step-number">01</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-globe step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Visit Website or Download App</h3>
+                            <p class="step-description">Visit our official website or download our mobile application to get started with your application.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step">
+                    <div class="step-number">02</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-mouse-pointer step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Navigate to Consumer Page & Click "Apply Now"</h3>
+                            <p class="step-description">Go to the consumer page and select "Apply Now" to begin your application process.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flow-step">
+                    <div class="step-number">03</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-mobile-alt step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Enter Mobile Number & Verify</h3>
+                            <p class="step-description">Enter your valid registered consumer mobile number, complete the captcha verification, and agree to the guidelines by selecting "Yes, I have read all the guidelines of PM Surya Ghar Muft Bijli Yojana." Then click "Verify".</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step">
+                    <div class="step-number">04</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-sms step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Enter OTP & Login</h3>
+                            <p class="step-description">Enter the valid mobile OTP received through SMS and click on "Login" to proceed with your application.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="flow-step">
+                    <div class="step-number">05</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-user step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Complete Profile Details</h3>
+                            <p class="step-description">After successful login, enter your profile details including consumer name, email, address, state, district, and PIN code. Click "Save" to continue.</p>
+                        </div>
+                    </div>
+                    <div class="step-connector"></div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="flow-step">
+                    <div class="step-number">06</div>
+                    <div class="flex items-start">
+                        <i class="fas fa-solar-panel step-icon"></i>
+                        <div class="step-content">
+                            <h3 class="step-title">Submit Solar Rooftop Application</h3>
+                            <p class="step-description">Submit your application either by clicking "Apply for Solar Rooftop" or through vendor selection. Select your state, district, and electricity distribution company/utility. Enter your consumer account number and click "Fetch Details". After loading your details, click "Next" to complete your application submission.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Information Section -->
+        <section class="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-12 shadow-lg">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">Important Notes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start">
+                    <i class="fas fa-info-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Document Requirements</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Make sure to have your electricity bill, identity proof, and address proof ready before starting the application process.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-clock text-yellow-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Processing Time</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Applications are typically processed within 15-30 days after submission of all required documents.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-question-circle text-green-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Need Help?</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Contact our helpline at 1800-180-3333 or email support@suryaghar.gov.in for assistance with your application.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-purple-500 text-xl mt-1 mr-3"></i>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Eligibility Check</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Ensure you meet the eligibility criteria before applying to avoid delays in processing your application.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="text-center mb-12">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Apply?</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">Start your journey towards free solar electricity today by following our simple application process.</p>
+                <button id="startApplication" class="bg-yellow-500 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-yellow-600 transition">
+                    <i class="fas fa-play-circle mr-2"></i> Start Application Now
+                </button>
+            </div>
+        </section>
+    </main>
+
+   <div id="footer"></div>
+<script>
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        });
+</script>
+
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        
+        // Check for saved theme preference or respect OS preference
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            darkModeIcon.classList.remove('fa-moon');
+            darkModeIcon.classList.add('fa-sun');
+        }
+        
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeIcon.classList.remove('fa-moon');
+                darkModeIcon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeIcon.classList.remove('fa-sun');
+                darkModeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Button Actions
+        document.getElementById('startApplication').addEventListener('click', function() {
+            alert('Redirecting to application form...');
+            // In a real implementation, this would navigate to the application form
+            // window.location.href = '/application-form';
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            alert('Redirecting to Login page...');
+        });
+
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            alert('Redirecting to Registration page...');
+        });
+    </script>
+</body>
+</html>
