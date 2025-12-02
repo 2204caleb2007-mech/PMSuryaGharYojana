@@ -35,6 +35,28 @@
             --input-border: #4b5563;
         }
 
+        .hero-gradient {
+    background: linear-gradient(135deg, var(--header-bg), #3b82f6, #60a5fa) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-footer {
+    background-color: #1f2937 !important; /* Dark gray background */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
@@ -334,7 +356,7 @@
 }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen m-0 p-0">
     <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle" id="darkModeToggle">
         <i class="fas fa-moon" id="darkModeIcon"></i>
@@ -344,35 +366,28 @@
 <div id="header"></div>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main>
         <!-- Hero Section with Full Screen Static Background -->
-        <section class="relative h-screen w-full overflow-hidden">
-            <!-- Full-screen static background image -->
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" 
-                     alt="Solar Panels Background" 
-                     class="w-full h-full object-cover fixed">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60"></div>
-            </div>
+<section class="relative h-screen w-full overflow-hidden">
+    <!-- Full-screen static background image -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <img src="https://i.postimg.cc/V6cTnNyt/hi.jpg"
+             alt="Solar Panels Background" 
+             class="absolute top-0 left-0 w-full h-full object-cover">
+    </div>
             
-            <!-- Hero content that stays in position -->
-            <div class="relative z-10 h-full flex items-center justify-center">
-                <div class="container mx-auto px-4">
-                    <div class="max-w-6xl mx-auto">
-                        <div class="flex flex-col md:flex-row items-center justify-between">
-                            <div class="md:w-1/2 mb-8 md:mb-0">
-                                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 glowing-title">Powering India's Solar Revolution</h2>
-                                <p class="text-xl md:text-2xl lg:text-3xl mb-8 text-white opacity-95">The PM Surya Ghar Yojana is a visionary scheme to provide free electricity to households through rooftop solar installations with substantial government subsidies.</p>
-                            </div>
-                            <div class="md:w-1/2"></div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Hero content that stays in position -->
+    <div class="relative z-10 h-full flex items-start justify-center pt-20 md:pt-32">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 glowing-title">Powering India's<br>Solar Revolution</h2>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <!-- Content Background Wrapper (applies only to content sections) -->
-        <div class="relative z-20 bg-gray-50 dark:bg-gray-900 -mt-12 pt-12 pb-12">
+        <div class="relative z-20 bg-gray-50 dark:bg-gray-900 pt-12 pb-12">
             
             <!-- Main Content Container -->
             <div class="container mx-auto px-4">
@@ -480,7 +495,7 @@
     </main>
 
 <!-- Navigation Footer -->
-<footer id="footer" class="bg-navy text-white py-10"></footer>
+<div id="footer"></div>
 
     <script>
         // Universal header/footer loader with XMLHttpRequest fallback
