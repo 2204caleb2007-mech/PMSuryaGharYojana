@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="import" href="header.html" id="header-import">
+<link rel="import" href="footer.html" id="footer-import">
     <title>PM Surya Ghar Yojana - Solar Subsidy Scheme</title>
     <style>
         :root {
@@ -307,6 +309,29 @@
                 opacity: 0;
             }
         }
+
+         /* Full screen hero image styles */
+        .fixed-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        /* Ensure main content appears after hero */
+        .main-content-wrapper {
+            position: relative;
+            z-index: 20;
+            background-color: var(--bg-primary);
+        }
+
+        #footer {
+  position: relative;
+  z-index: 50;
+}
     </style>
 </head>
 <body class="min-h-screen">
@@ -315,141 +340,194 @@
         <i class="fas fa-moon" id="darkModeIcon"></i>
     </div>
 
-    <!-- Navigation Header -->
-    <div id="header"></div>
-    <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-    </script>
+<!-- Navigation Header -->
+<div id="header"></div>
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
-        <!-- Hero Section -->
-        <section class="rounded-3xl overflow-hidden shadow-2xl mb-12">
-            <div class="hero-gradient text-white p-8 md:p-12">
-                <div class="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <h2 class="text-4xl md:text-6xl font-bold mb-6 glowing-title">Powering India's Solar Revolution</h2>
-                        <p class="text-xl md:text-2xl mb-8 opacity-90">The PM Surya Ghar Yojana is a visionary scheme to provide free electricity to households through rooftop solar installations with substantial government subsidies.</p>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <img src="https://placehold.co/600x400/1e40af/ffffff?text=PM+Surya+Ghar+Yojana" alt="PM Surya Ghar Yojana" class="rounded-2xl shadow-xl w-full max-w-md">
-                    </div>
-                </div>
+        <!-- Hero Section with Full Screen Static Background -->
+        <section class="relative h-screen w-full overflow-hidden">
+            <!-- Full-screen static background image -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80" 
+                     alt="Solar Panels Background" 
+                     class="w-full h-full object-cover fixed">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/60"></div>
             </div>
-        </section>
-
-        <!-- Scheme Description Section -->
-        <section class="mb-12">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800 dark:text-white">About PM Surya Ghar Yojana</h2>
-                <div class="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
-                    <p class="mb-4">The PM Surya Ghar: Muft Bijli Yojana is a revolutionary scheme launched by the Government of India to promote the adoption of rooftop solar systems in residential households. This ambitious initiative aims to provide free electricity to up to 1 crore households who choose to install rooftop solar systems, while also offering substantial financial subsidies to make the transition affordable and accessible.</p>
-                    
-                    <p class="mb-4">Under this scheme, eligible households can receive subsidies of up to 60% of the installation cost, with a maximum subsidy of ₹78,000. The scheme is designed to not only reduce electricity bills for households but also contribute to India's renewable energy goals and environmental sustainability. By harnessing solar power, households can become self-reliant in their energy needs and even earn additional income by selling excess electricity back to the grid.</p>
-                    
-                    <p class="mb-4">The application process has been simplified through a centralized national portal that streamlines the entire process - from registration to installation and subsidy disbursement. The scheme also supports the development of a robust ecosystem for solar energy, creating employment opportunities for youth with technical skills in installation, manufacturing, and maintenance of solar panels.</p>
-                    
-                    <p class="mb-4">With an allocated budget of ₹75,021 crore, the PM Surya Ghar Yojana represents one of the world's largest rooftop solar programs. It aligns with India's commitment to reach 500 GW of renewable energy capacity by 2030 and achieve net-zero emissions by 2070. The scheme not only addresses energy access and affordability but also positions India as a global leader in the clean energy transition.</p>
-                    
-                    <p>Households interested in availing benefits under this scheme can register through the national portal, where they can also access a subsidy calculator, vendor information, and detailed guidelines. The scheme is expected to not only transform India's energy landscape but also empower households to become active participants in the country's sustainable development journey.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- AI Analysis Section -->
-        <section class="mb-12">
-            <div class="ai-analysis-box rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
-                <h3 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">AI-Powered Solar Analysis</h3>
-                <p class="text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300">Our advanced AI system automatically verifies rooftop solar installations and checks eligibility for subsidies under the PM Surya Ghar Yojana scheme.</p>
-                <button id="startAnalysis" class="rocket-launch cta-button text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg relative overflow-hidden">
-                    <i class="fas fa-rocket rocket-icon mr-2"></i> Start AI Analysis
-                </button>
-            </div>
-        </section>
-
-        <!-- Quick Actions Section -->
-        <section class="mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">Quick Actions</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <!-- Subsidy Calculator Box -->
-                <div class="quick-action-box rounded-2xl p-8 text-center">
-                    <i class="fas fa-calculator text-5xl text-green-500 mb-6"></i>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Subsidy Calculator</h3>
-                    <p class="text-gray-700 dark:text-gray-300 mb-6">Calculate your potential savings and subsidy amount based on your location and energy needs.</p>
-                    <button id="subsidyCalculatorBtn" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
-                        <i class="fas fa-external-link-alt mr-2"></i> Open Calculator
-                    </button>
-                </div>
-                
-                <!-- Application Flowchart Box -->
-                <div class="quick-action-box rounded-2xl p-8 text-center">
-                    <i class="fas fa-project-diagram text-5xl text-blue-500 mb-6"></i>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Application Process</h3>
-                    <p class="text-gray-700 dark:text-gray-300 mb-6">Follow our step-by-step flowchart to understand how to apply for the PM Surya Ghar Yojana scheme.</p>
-                    <button id="applicationFlowBtn" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition">
-                        <i class="fas fa-external-link-alt mr-2"></i> View Flowchart
-                    </button>
+            <!-- Hero content that stays in position -->
+            <div class="relative z-10 h-full flex items-center justify-center">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-6xl mx-auto">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div class="md:w-1/2 mb-8 md:mb-0">
+                                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 glowing-title">Powering India's Solar Revolution</h2>
+                                <p class="text-xl md:text-2xl lg:text-3xl mb-8 text-white opacity-95">The PM Surya Ghar Yojana is a visionary scheme to provide free electricity to households through rooftop solar installations with substantial government subsidies.</p>
+                            </div>
+                            <div class="md:w-1/2"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Scheme Benefits Section -->
-        <section class="mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">Scheme Benefits</h2>
+        <!-- Content Background Wrapper (applies only to content sections) -->
+        <div class="relative z-20 bg-gray-50 dark:bg-gray-900 -mt-12 pt-12 pb-12">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-home text-3xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">For Residential Users</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Subsidies up to ₹78,000 for installing rooftop solar systems</p>
-                </div>
-                
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-industry text-3xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">For Commercial Users</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Accelerated depreciation and tax benefits available</p>
-                </div>
-                
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-bolt text-3xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Free Electricity</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Generate your own power and reduce electricity bills significantly</p>
-                </div>
-                
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-chart-line text-3xl text-purple-500 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Income Opportunity</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Sell excess electricity back to the grid and earn additional income</p>
-                </div>
+            <!-- Main Content Container -->
+            <div class="container mx-auto px-4">
 
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-rupee-sign text-red-400 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Substantial Subsidies</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Up to 60% subsidy on installation costs for eligible households</p>
-                </div>
-                <div class="glow-box rounded-xl p-6 text-center">
-                    <i class="fas fa-leaf text-emerald-400 text-3xl mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Green Energy</h3>
-                    <p class="text-gray-700 dark:text-gray-300">Contribute to India's renewable energy goals and a cleaner environment</p>
-                </div>
-            </div>
-        </section>
+                <!-- Scheme Description Section -->
+                <section class="mb-12">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 max-w-6xl mx-auto">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800 dark:text-white">About PM Surya Ghar Yojana</h2>
+                        <div class="prose prose-lg max-w-none text-gray-700 dark:text-gray-300">
+                            <p class="mb-4">The PM Surya Ghar: Muft Bijli Yojana is a revolutionary scheme launched by the Government of India to promote the adoption of rooftop solar systems in residential households. This ambitious initiative aims to provide free electricity to up to 1 crore households who choose to install rooftop solar systems, while also offering substantial financial subsidies to make the transition affordable and accessible.</p>
+                            
+                            <p class="mb-4">Under this scheme, eligible households can receive subsidies of up to 60% of the installation cost, with a maximum subsidy of ₹78,000. The scheme is designed to not only reduce electricity bills for households but also contribute to India's renewable energy goals and environmental sustainability. By harnessing solar power, households can become self-reliant in their energy needs and even earn additional income by selling excess electricity back to the grid.</p>
+                            
+                            <p class="mb-4">The application process has been simplified through a centralized national portal that streamlines the entire process - from registration to installation and subsidy disbursement. The scheme also supports the development of a robust ecosystem for solar energy, creating employment opportunities for youth with technical skills in installation, manufacturing, and maintenance of solar panels.</p>
+                            
+                            <p class="mb-4">With an allocated budget of ₹75,021 crore, the PM Surya Ghar Yojana represents one of the world's largest rooftop solar programs. It aligns with India's commitment to reach 500 GW of renewable energy capacity by 2030 and achieve net-zero emissions by 2070. The scheme not only addresses energy access and affordability but also positions India as a global leader in the clean energy transition.</p>
+                            
+                            <p>Households interested in availing benefits under this scheme can register through the national portal, where they can also access a subsidy calculator, vendor information, and detailed guidelines. The scheme is expected to not only transform India's energy landscape but also empower households to become active participants in the country's sustainable development journey.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI Analysis Section -->
+                <section class="mb-12">
+                    <div class="ai-analysis-box rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">AI-Powered Solar Analysis</h3>
+                        <p class="text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300">Our advanced AI system automatically verifies rooftop solar installations and checks eligibility for subsidies under the PM Surya Ghar Yojana scheme.</p>
+                        <button id="startAnalysis" class="rocket-launch cta-button text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg relative overflow-hidden">
+                            <i class="fas fa-rocket rocket-icon mr-2"></i> Start AI Analysis
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Section -->
+                <section class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">Quick Actions</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <!-- Subsidy Calculator Box -->
+                        <div class="quick-action-box rounded-2xl p-8 text-center">
+                            <i class="fas fa-calculator text-5xl text-green-500 mb-6"></i>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Subsidy Calculator</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-6">Calculate your potential savings and subsidy amount based on your location and energy needs.</p>
+                            <button id="subsidyCalculatorBtn" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+                                <i class="fas fa-external-link-alt mr-2"></i> Open Calculator
+                            </button>
+                        </div>
+                        
+                        <!-- Application Flowchart Box -->
+                        <div class="quick-action-box rounded-2xl p-8 text-center">
+                            <i class="fas fa-project-diagram text-5xl text-blue-500 mb-6"></i>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Application Process</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-6">Follow our step-by-step flowchart to understand how to apply for the PM Surya Ghar Yojana scheme.</p>
+                            <button id="applicationFlowBtn" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition">
+                                <i class="fas fa-external-link-alt mr-2"></i> View Flowchart
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Scheme Benefits Section -->
+                <section class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">Scheme Benefits</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-home text-3xl text-blue-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">For Residential Users</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Subsidies up to ₹78,000 for installing rooftop solar systems</p>
+                        </div>
+                        
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-industry text-3xl text-green-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">For Commercial Users</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Accelerated depreciation and tax benefits available</p>
+                        </div>
+                        
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-bolt text-3xl text-yellow-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Free Electricity</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Generate your own power and reduce electricity bills significantly</p>
+                        </div>
+                        
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-chart-line text-3xl text-purple-500 mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Income Opportunity</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Sell excess electricity back to the grid and earn additional income</p>
+                        </div>
+
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-rupee-sign text-red-400 text-3xl mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Substantial Subsidies</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Up to 60% subsidy on installation costs for eligible households</p>
+                        </div>
+                        <div class="glow-box rounded-xl p-6 text-center">
+                            <i class="fas fa-leaf text-emerald-400 text-3xl mb-4"></i>
+                            <h3 class="text-xl font-bold mb-2 text-gray-800 dark:text-white">Green Energy</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Contribute to India's renewable energy goals and a cleaner environment</p>
+                        </div>
+                    </div>
+                </section>
+                
+            </div> <!-- Close container -->
+        </div> <!-- Close content background wrapper -->
     </main>
 
-   <div id="footer"></div>
-<script>
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        });
-</script>
+<!-- Navigation Footer -->
+<footer id="footer" class="bg-navy text-white py-10"></footer>
 
+    <script>
+        // Universal header/footer loader with XMLHttpRequest fallback
+        function loadHeaderAndFooter() {
+            // Function to load file (works with both local and server files)
+            function loadFile(elementId, filename) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', filename, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            document.getElementById(elementId).innerHTML = xhr.responseText;
+                            console.log(`${filename} loaded successfully`);
+                            
+                            // If loading header, initialize its scripts
+                            if (filename === 'header.html') {
+                                initializeHeaderScripts();
+                            }
+                        } else {
+                            console.error(`Error loading ${filename}: ${xhr.status}`);
+                            document.getElementById(elementId).innerHTML = 
+                                `<div style="color: #666; padding: 20px; text-align: center;">
+                                    ${filename} content (${xhr.status} error)
+                                </div>`;
+                        }
+                    }
+                };
+                xhr.send();
+            }
+            
+            // Load both files
+            loadFile('header', 'header.html');
+            loadFile('footer', 'footer.html');
+        }
+        
+        function initializeHeaderScripts() {
+            // Add solar circuit initialization here if needed
+            const circuitContainer = document.getElementById('solarCircuit');
+            if (circuitContainer) {
+                console.log('Solar circuit container found');
+                // Initialize your solar circuit animation here
+            }
+        }
+        
+        // Start loading when page loads
+        window.addEventListener('load', loadHeaderAndFooter);
+    </script>
     <script>
         // Dark Mode Toggle
         const darkModeToggle = document.getElementById('darkModeToggle');
