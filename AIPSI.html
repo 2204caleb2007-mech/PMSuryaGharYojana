@@ -350,28 +350,34 @@
         }
 
         /* Glowing title only in dark mode */
-        .dark-mode .glowing-title {
-            background: linear-gradient(90deg, 
-                #00ffff, #33ffff, #66ffff, #e0ffff, 
-                #00ffff, #33ffff, #66ffff, #e0ffff,
-                #00ffff, #33ffff, #66ffff, #e0ffff,
-                #00ffff, #33ffff, #66ffff, #e0ffff,
-                #00ffff, #33ffff, #66ffff, #e0ffff, 
-                #00ffff, #33ffff, #66ffff, #e0ffff
-            );
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: colorShift 16s ease infinite;
-            position: relative;
-        }
+.dark-mode .glowing-title {
+    background: linear-gradient(90deg, 
+        #00ffff, #33ffff, #66ffff, #e0ffff, 
+        #00ffff, #33ffff, #66ffff, #e0ffff,
+        #00ffff, #33ffff, #66ffff, #e0ffff,
+        #00ffff, #33ffff, #66ffff, #e0ffff,
+        #00ffff, #33ffff, #66ffff, #e0ffff, 
+        #00ffff, #33ffff, #66ffff, #e0ffff
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-clip: text;
+    animation: colorShift 16s ease infinite;
+    position: relative;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
 
         /* Light mode title - no glowing */
         .light-mode-title {
-            color: #1e40af;
+            color: #1e40af !important;
             font-weight: 800;
         }
+
+        .dark-mode h2.glowings-title {
+    color: transparent !important;
+}
 
         @keyframes colorShift {
             0% { background-position: 0% 50%; }
@@ -379,44 +385,6 @@
             50% { background-position: 100% 50%; }
             75% { background-position: 50% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* Solar Panel Detector Title */
-        .solar-panel-detector-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-        }
-
-        .dark-mode .solar-panel-detector-title {
-            background: linear-gradient(90deg, 
-                #00ffff, #33ffff, #66ffff, #e0ffff,
-                #00ffff, #33ffff, #66ffff, #e0ffff
-            );
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: colorShift 12s ease infinite;
-        }
-
-        /* Detailed Results Title */
-        .detailed-results-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-        }
-
-        .dark-mode .detailed-results-title {
-            background: linear-gradient(90deg, 
-                #00ffff, #33ffff, #66ffff, #e0ffff,
-                #00ffff, #33ffff, #66ffff, #e0ffff
-            );
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: colorShift 12s ease infinite;
         }
 
         /* Card styling without glowing borders */
@@ -506,7 +474,7 @@
         <!-- AI Analysis Section -->
         <section id="aiAnalysisSection" class="analysis-card p-6 mb-12">
             <div class="text-center mb-8">
-                <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center light-mode-title dark:glowing-title">AI-Powered Solar Analysis</h2>
+                <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center glowing-title light-mode-title" id="mainTitle">AI-Powered Solar Analysis</h2>
             </div>          
             
             <!-- First row: Input Data | Select Location -->
@@ -588,7 +556,7 @@
             
             <!-- Solar Panel Detector Title (Hidden Initially) -->
             <div id="solarPanelDetectorTitle" class="hidden text-center mb-8">
-                <h2 class="solar-panel-detector-title light-mode-title dark:glowing-title">Solar Panel Detector</h2>
+                <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center glowing-title light-mode-title" id="mainTitle">Solar Panel Detector</h2>
             </div>
             
             <!-- Second row: Analysis Results | 3D Satellite View (Hidden Initially) -->
@@ -661,18 +629,18 @@
                 </div>
                 
                 <!-- View Detailed Results Button -->
-                <div class="text-center my-8">
-                    <button id="viewDetailedResults" class="primary-button text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg">
-                        <i class="fas fa-chart-bar mr-3"></i> View Detailed Results / Download Results
-                    </button>
-                </div>
+<div class="text-center my-8">
+    <button id="viewDetailedResults" class="primary-button text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg">
+        <i class="fas fa-chart-bar mr-3"></i> View Detailed Results / Download Results
+    </button>
+</div>
             </div>
             
             <!-- Detailed Results Section (Hidden Initially) -->
             <div id="detailedResults" class="hidden">
                 <!-- Detailed Results Title -->
                 <div class="text-center mb-8">
-                    <h2 class="detailed-results-title light-mode-title dark:glowing-title">Detailed Results</h2>
+                    <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center glowing-title light-mode-title" id="mainTitle">Detailed Results</h2>
                 </div>
                 
                 <!-- ANALYSIS RESULTS section -->
@@ -1059,16 +1027,20 @@
         });
 
         // View Detailed Results Button
-        viewDetailedResultsBtn.addEventListener('click', () => {
-            detailedResults.classList.remove('hidden');
-            detailedResults.scrollIntoView({ behavior: 'smooth' });
-        });
+viewDetailedResultsBtn.addEventListener('click', () => {
+    detailedResults.classList.remove('hidden');
+    // Hide the button itself after clicking
+    viewDetailedResultsBtn.classList.add('hidden');
+    detailedResults.scrollIntoView({ behavior: 'smooth' });
+});
 
-        newAnalysisBtn.addEventListener('click', () => {
-            detailedResults.classList.add('hidden');
-            resultsSections.classList.add('hidden');
-            solarPanelDetectorTitle.classList.add('hidden');
-            document.getElementById('sampleId').value = '';
+newAnalysisBtn.addEventListener('click', () => {
+    detailedResults.classList.add('hidden');
+    resultsSections.classList.add('hidden');
+    solarPanelDetectorTitle.classList.add('hidden');
+    // Make the button visible again for new analysis
+    viewDetailedResultsBtn.classList.remove('hidden');
+    document.getElementById('sampleId').value = '';
             document.getElementById('latitude').value = '';
             document.getElementById('longitude').value = '';
             document.getElementById('csvUpload').value = '';

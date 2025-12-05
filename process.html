@@ -34,14 +34,14 @@
         }
 
         .hero-gradient {
-    background: linear-gradient(135deg, var(--header-bg), #3b82f6, #60a5fa) !important;
-    position: relative;
-    overflow: hidden;
-}
+            background: linear-gradient(135deg, var(--header-bg), #3b82f6, #60a5fa) !important;
+            position: relative;
+            overflow: hidden;
+        }
 
-.bg-footer {
-    background-color: #1f2937 !important; /* Dark gray background */
-}
+        .bg-footer {
+            background-color: #1f2937 !important;
+        }
 
         body {
             background-color: var(--bg-primary);
@@ -160,7 +160,7 @@
 
         .flowchart-container {
             position: relative;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -242,22 +242,6 @@
             line-height: 1.5;
         }
 
-        .back-button {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            background-color: var(--bg-primary);
-            transform: translateY(-2px);
-        }
-
         @media (max-width: 768px) {
             .flow-step {
                 padding: 15px;
@@ -273,6 +257,46 @@
                 font-size: 16px;
             }
         }
+
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-home-btn:hover {
+            background: #2563eb;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-home-btn.pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        .dark-heading {
+    color: var(--text-primary);
+}
     </style>
 </head>
 <body class="min-h-screen">
@@ -286,32 +310,25 @@
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
-        <!-- Back Button -->
-        <div class="mb-8">
-            <a href="dex.html" class="back-button">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Home
-            </a>
-        </div>
-
         <!-- Page Title -->
         <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">Application Process</h1>
-            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Follow these simple steps to apply for the PM Surya Ghar Yojana and start your journey towards free solar electricity.
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-800 dark:text-gray-800 mb-4">Solar Analysis Process</h1>
+            <p class="text-xl text-blue-800 dark:text-gray-800 max-w-3xl mx-auto">
+                Follow these 6 simple steps to analyze solar panel installations using our AI technology.
             </p>
         </div>
 
         <!-- Flowchart Section -->
         <section class="mb-12">
-            <div class="flowchart-container">
+            <div class="flowchart-container text-center">
                 <!-- Step 1 -->
                 <div class="flow-step">
                     <div class="step-number">01</div>
                     <div class="flex items-start">
-                        <i class="fas fa-globe step-icon"></i>
+                        <i class="fas fa-map-marker-alt step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Visit Website or Download App</h3>
-                            <p class="step-description">Visit our official website or download our mobile application to get started with your application.</p>
+                            <h3 class="step-title">Select Location on Map</h3>
+                            <p class="step-description">Choose location via map click or search. Coordinates auto-filled with address display.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
@@ -321,10 +338,10 @@
                 <div class="flow-step">
                     <div class="step-number">02</div>
                     <div class="flex items-start">
-                        <i class="fas fa-mouse-pointer step-icon"></i>
+                        <i class="fas fa-crosshairs step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Navigate to Consumer Page & Click "Apply Now"</h3>
-                            <p class="step-description">Go to the consumer page and select "Apply Now" to begin your application process.</p>
+                            <h3 class="step-title">Use Selected Coordinates</h3>
+                            <p class="step-description">Transfer lat/long to input fields. Sample ID generated automatically from coordinates.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
@@ -334,10 +351,10 @@
                 <div class="flow-step">
                     <div class="step-number">03</div>
                     <div class="flex items-start">
-                        <i class="fas fa-mobile-alt step-icon"></i>
+                        <i class="fas fa-search step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Enter Mobile Number & Verify</h3>
-                            <p class="step-description">Enter your valid registered consumer mobile number, complete the captcha verification, and agree to the guidelines by selecting "Yes, I have read all the guidelines of PM Surya Ghar Muft Bijli Yojana." Then click "Verify".</p>
+                            <h3 class="step-title">Initiate AI Analysis</h3>
+                            <p class="step-description">Start analysis with 1200 sq.ft radius scan. AI processes satellite imagery automatically.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
@@ -347,10 +364,10 @@
                 <div class="flow-step">
                     <div class="step-number">04</div>
                     <div class="flex items-start">
-                        <i class="fas fa-sms step-icon"></i>
+                        <i class="fas fa-satellite step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Enter OTP & Login</h3>
-                            <p class="step-description">Enter the valid mobile OTP received through SMS and click on "Login" to proceed with your application.</p>
+                            <h3 class="step-title">View 3D Satellite Results</h3>
+                            <p class="step-description">Interactive 3D view with controls. Altitude, tilt, and imagery details displayed.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
@@ -360,10 +377,10 @@
                 <div class="flow-step">
                     <div class="step-number">05</div>
                     <div class="flex items-start">
-                        <i class="fas fa-user step-icon"></i>
+                        <i class="fas fa-chart-bar step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Complete Profile Details</h3>
-                            <p class="step-description">After successful login, enter your profile details including consumer name, email, address, state, district, and PIN code. Click "Save" to continue.</p>
+                            <h3 class="step-title">Review Analysis Summary</h3>
+                            <p class="step-description">Panel detection, count, area, capacity results. Confidence score and QC status shown.</p>
                         </div>
                     </div>
                     <div class="step-connector"></div>
@@ -373,58 +390,15 @@
                 <div class="flow-step">
                     <div class="step-number">06</div>
                     <div class="flex items-start">
-                        <i class="fas fa-solar-panel step-icon"></i>
+                        <i class="fas fa-download step-icon"></i>
                         <div class="step-content">
-                            <h3 class="step-title">Submit Solar Rooftop Application</h3>
-                            <p class="step-description">Submit your application either by clicking "Apply for Solar Rooftop" or through vendor selection. Select your state, district, and electricity distribution company/utility. Enter your consumer account number and click "Fetch Details". After loading your details, click "Next" to complete your application submission.</p>
+                            <h3 class="step-title">Download/Save Results</h3>
+                            <p class="step-description">Download JSON report or save to database. Start new analysis or view details.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Additional Information Section -->
-        <section class="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-12 shadow-lg">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">Important Notes</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex items-start">
-                    <i class="fas fa-info-circle text-blue-500 text-xl mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Document Requirements</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Make sure to have your electricity bill, identity proof, and address proof ready before starting the application process.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <i class="fas fa-clock text-yellow-500 text-xl mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Processing Time</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Applications are typically processed within 15-30 days after submission of all required documents.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <i class="fas fa-question-circle text-green-500 text-xl mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Need Help?</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Contact our helpline at 1800-180-3333 or email support@suryaghar.gov.in for assistance with your application.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <i class="fas fa-check-circle text-purple-500 text-xl mt-1 mr-3"></i>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-white">Eligibility Check</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Ensure you meet the eligibility criteria before applying to avoid delays in processing your application.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="text-center mb-12">
-            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Apply?</h2>
-                <p class="text-xl mb-8 max-w-2xl mx-auto">Start your journey towards free solar electricity today by following our simple application process.</p>
-                <button id="startApplication" class="bg-yellow-500 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-yellow-600 transition">
-                    <i class="fas fa-play-circle mr-2"></i> Start Application Now
+                <button id="startApplication" class="bg-white text-blue-800 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-100 transition">
+                    <i class="fas fa-play-circle mr-2"></i> Start Analysis Now
                 </button>
             </div>
         </section>
@@ -481,7 +455,7 @@
     </script>
 
     <!-- Floating Home Button -->
-    <a href="index.html" class="floating-home-btn pulse">
+    <a href="dex.html" class="floating-home-btn pulse">
         <i class="fas fa-home"></i>
     </a>
     
@@ -516,17 +490,7 @@
 
         // Button Actions
         document.getElementById('startApplication').addEventListener('click', function() {
-            alert('Redirecting to application form...');
-            // In a real implementation, this would navigate to the application form
-            // window.location.href = '/application-form';
-        });
-
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            alert('Redirecting to Login page...');
-        });
-
-        document.getElementById('registerBtn').addEventListener('click', function() {
-            alert('Redirecting to Registration page...');
+            window.location.href = 'AIPSI.html';
         });
     </script>
 </body>

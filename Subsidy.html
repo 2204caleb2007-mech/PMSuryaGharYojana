@@ -185,6 +185,42 @@
         .dark-mode .bg-gradient-to-r {
             background-image: linear-gradient(to right, var(--header-bg), #1e3a8a) !important;
         }
+
+        .floating-home-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #3b82f6;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.floating-home-btn:hover {
+    background: #2563eb;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.floating-home-btn.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
     </style>
 </head>
 <body class="min-h-screen">
@@ -198,17 +234,13 @@
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
-        <!-- Hero Section -->
-        <section class="bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-2xl p-8 mb-8 shadow-lg">
-            <div class="max-w-2xl">
+            <div class="text-center">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Solar Subsidy Calculator</h2>
                 <p class="text-lg mb-6">Calculate your potential subsidy under the PM Surya Ghar Yojana scheme based on your system capacity and location.</p>
             </div>
-        </section>
 
         <!-- Calculator Section -->
         <section class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold mb-6 text-center glowing-title">Subsidy Calculator</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block input-label mb-2" for="calcCapacity">System Capacity (kW)</label>
@@ -231,7 +263,7 @@
                 </div>
             </div>
             <div class="mt-6 p-4 bg-blue-800 text-white rounded-lg">
-                <h3 class="text-lg font-semibold mb-2">Estimated Subsidy</h3>
+                <h3 class="text-lg font-semibold mb-2">Estimated Subsidy (to be approved yet)</h3>
                 <p id="calculatedSubsidy" class="text-2xl font-bold">₹14,000 - ₹18,000</p>
                 <p class="text-sm opacity-80 mt-2">Based on current subsidy rates for residential installations</p>
             </div>
@@ -242,7 +274,7 @@
             <h2 class="text-2xl font-bold mb-6 text-center">Subsidy Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Eligibility Criteria</h3>
+                    <h3 class="text-xl font-semibold mb-4">Eligibility Criteria (to be approved yet)</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
@@ -258,12 +290,12 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span class="input-label">System capacity between 1 kW to 10 kW</span>
+                            <span class="input-label">System capacity between a given range</span>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Subsidy Rates</h3>
+                    <h3 class="text-xl font-semibold mb-4">Subsidy Rates (to be approved yet)</h3>
                     <div class="space-y-3">
                         <div class="flex justify-between items-center py-2 px-4 bg-gray-50 rounded-lg">
                             <span class="input-label">Up to 3 kW</span>
