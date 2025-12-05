@@ -457,7 +457,7 @@
                         <span>Sending your message...</span>
                     </div>
                     
-                    <form id="contactForm" method="POST" action="https://formspree.io/f/mnngogvn" class="space-y-6">
+                    <form id="contactForm" method="POST" action="https://formspree.io/f/xwpgqryb" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="firstName" class="block input-label mb-2">First Name</label>
@@ -734,11 +734,15 @@
                 channel = ably.channels.get('solar-expert-chat');
                 
                 // Subscribe to messages
-                channel.subscribe('message', (message) => {
-                    const data = message.data;
-                    addChatMessage(data.sender, data.message, data.time, data.type);
-                });
-                
+channel.subscribe('message', (message) => {
+    const data = message.data;
+    const myUsername = getUsername();
+    
+    // Don't show messages from yourself (they're already in the UI)
+    if (data.sender !== myUsername) {
+        addChatMessage(data.sender, data.message, data.time, "received");
+    }
+});
                 // Set up connection event listeners
                 ably.connection.on('connected', () => {
                     console.log('Connected to Ably!');
@@ -798,42 +802,44 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // Send a new message
-        function sendChatMessage() {
-            const chatInput = document.getElementById('chatInput');
-            const message = chatInput.value.trim();
-            
-            if (message) {
-                const now = new Date();
-                const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                
-                // Create message object
-                const messageData = {
-                    sender: getUsername(),
-                    message: message,
-                    time: time,
-                    type: "sent",
-                    timestamp: now.getTime()
-                };
-                
-                // Add to UI immediately
-                addChatMessage(messageData.sender, messageData.message, messageData.time, messageData.type);
-                chatInput.value = '';
-                
-                // Publish to Ably
-                if (channel) {
-                    channel.publish('message', messageData, (err) => {
-                        if (err) {
-                            console.error('Error sending message:', err);
-                            addSystemMessage('Failed to send message - check connection');
-                        }
-                        // Removed automated expert responses
-                    });
-                } else {
-                    addSystemMessage('Not connected - message not sent to experts');
+// Send a new message
+function sendChatMessage() {
+    const chatInput = document.getElementById('chatInput');
+    const message = chatInput.value.trim();
+    
+    if (message) {
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        // Create message object
+        const messageData = {
+            sender: getUsername(),
+            message: message,
+            time: time,
+            type: "sent",
+            timestamp: now.getTime()
+        };
+        
+        // Clear input immediately
+        chatInput.value = '';
+        
+        // Add to UI immediately
+        addChatMessage(messageData.sender, messageData.message, messageData.time, messageData.type);
+        
+        // Publish to Ably
+        if (channel) {
+            channel.publish('message', messageData, (err) => {
+                if (err) {
+                    console.error('Error sending message:', err);
+                    addSystemMessage('Failed to send message - check connection');
                 }
-            }
+                // Removed automated expert responses
+            });
+        } else {
+            addSystemMessage('Not connected - message not sent to experts');
         }
+    }
+}
 
         // Toggle between contact info and chat (in right column)
         document.getElementById('openChatBtn').addEventListener('click', function() {
