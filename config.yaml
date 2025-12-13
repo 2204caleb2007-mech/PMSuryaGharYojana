@@ -1,0 +1,13 @@
+app:
+  debug: False
+  host: "0.0.0.0"
+  port: 5000
+
+roboflow:
+  api_url: "https://serverless.roboflow.com"
+  api_key: "h02d8ka3vbQmsEIVyLj5"
+  model_id: "custom-workflow-object-detection-tgnqc-af4gr/1"
+
+ml_models:
+  retinanet_model_path: "solar_panel_detector_robo.pth"
+  confidence_threshold: 0.5

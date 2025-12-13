@@ -1,0 +1,29 @@
+# CORE PACKAGES ONLY - No conflicts!
+# Install this first: pip install -r requirements.txt
+# Then optionally install: pip install -r requirements-optional.txt
+
+Flask==3.0.0
+flask-cors==4.0.0
+requests==2.31.0
+pyyaml==6.0
+python-dotenv==1.0.0
+gunicorn==21.2.0
+
+# Optional packages in requirements-optional.txt
+# Uncomment here if you want them installed automatically:
+# numpy>=1.26.0
+# pandas>=2.1.0
+# scipy>=1.11.0
+# scikit-learn>=1.3.0
+# opencv-python>=4.8.0
+# Pillow>=10.0.0
+pytz==2023.3
+redis==5.0.1
+
+# Development
+gunicorn==21.2.0
+Werkzeug==2.3.7
+Jinja2==3.1.2
+MarkupSafe==2.1.3
+click==8.1.6
+itsdangerous==2.1.2
