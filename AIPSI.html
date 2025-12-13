@@ -517,8 +517,8 @@
                         </button>
 
                         <button id="analyzeLocation" class="primary-button text-white px-6 py-3 rounded-lg font-semibold transition flex items-center justify-center">
-                            <i class="fas fa-search mr-2"></i> Analyze Location
-                        </button>
+    <i class="fas fa-search mr-2"></i> Analyze Location
+</button>
                     </div>
                 </div>
                 
@@ -567,15 +567,16 @@
                         <div class="text-2xl font-bold mb-6 px-4 py-3 text-center section-header bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg">
                             Analysis Results
                         </div>
-                        <div class="p-4">
-                            <div id="analysisPreview" class="space-y-6">
-                                <div class="text-center py-8">
-                                    <i class="fas fa-solar-panel text-5xl mb-4 text-blue-500"></i>
-                                    <p class="text-lg font-medium input-label">Solar panel analysis completed</p>
-                                    <p class="text-sm mt-2 text-gray-600 dark:text-gray-400">Results are ready for review</p>
-                                </div>
-                            </div>
-                        </div>
+<div class="p-4">
+    <div id="analysisPreview" class="space-y-6">
+        <div class="text-center py-8">
+            <i class="fas fa-robot text-5xl mb-4 text-blue-500"></i>
+            <p class="text-lg font-medium input-label">Ready for ML Analysis</p>
+            <p class="text-sm mt-2 text-gray-600 dark:text-gray-400">Upload an image and click "Analyze with ML Model"</p>
+            <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">All results will come from actual ML model inference</p>
+        </div>
+    </div>
+</div>
                     </div>
                     
                     <!-- 3D Satellite View Section -->
@@ -654,12 +655,12 @@
                             <div class="space-y-4">
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">Solar Panels Detected:</span>
-                                    <span id="hasSolarResult" class="value-display status-verified">Yes</span>
+                                    <span id="hasSolarResult" class="value-display status-no-solar">N/A</span>
                                 </div>
                                 
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">Estimated Panel Count:</span>
-                                    <span id="panelCountResult" class="value-display">5</span>
+                                    <span id="panelCountResult" class="value-display">0</span>
                                 </div>
                             </div>
                             
@@ -667,12 +668,12 @@
                             <div class="space-y-4">
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">Confidence Score:</span>
-                                    <span id="confidenceResult" class="value-display">0.96</span>
+                                    <span id="confidenceResult" class="value-display">0.000</span>
                                 </div>
                                 
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">Estimated PV Area:</span>
-                                    <span id="pvAreaResult" class="value-display">9.6 m²</span>
+                                    <span id="pvAreaResult" class="value-display">N/A</span>
                                 </div>
                             </div>
                             
@@ -680,12 +681,12 @@
                             <div class="space-y-4">
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">Estimated Capacity:</span>
-                                    <span id="capacityResult" class="value-display">2 kW</span>
+                                    <span id="capacityResult" class="value-display">N/A</span>
                                 </div>
                                 
                                 <div class="flex justify-between items-center py-4 px-5 results-box min-h-[80px]">
                                     <span class="input-label font-medium">QC Status:</span>
-                                    <span id="qcStatusResult" class="value-display status-verified">VERIFIABLE</span>
+                                    <span id="qcStatusResult" class="value-display status-no-solar">PENDING</span>
                                 </div>
                             </div>
                         </div>
@@ -702,19 +703,19 @@
                         <div class="p-6">
                             <div class="space-y-4">
                                 <ul id="qcNotesList" class="space-y-3">
-                                    <li class="flex items-start qc-item p-3 rounded-lg">
-                                        <i class="fas fa-check-circle qc-tick mt-1 mr-3 text-lg"></i>
-                                        <span class="input-label font-medium">Clear roof view within 1200 sq.ft radius</span>
-                                    </li>
-                                    <li class="flex items-start qc-item p-3 rounded-lg">
-                                        <i class="fas fa-check-circle qc-tick mt-1 mr-3 text-lg"></i>
-                                        <span class="input-label font-medium">Distinct solar module patterns detected</span>
-                                    </li>
-                                    <li class="flex items-start qc-item p-3 rounded-lg">
-                                        <i class="fas fa-check-circle qc-tick mt-1 mr-3 text-lg"></i>
-                                        <span class="input-label font-medium">Consistent panel alignment and spacing</span>
-                                    </li>
-                                </ul>
+    <li class="flex items-start qc-item p-3 rounded-lg">
+        <i class="fas fa-info-circle qc-tick mt-1 mr-3 text-lg"></i>
+        <span class="input-label font-medium">Waiting for ML model analysis</span>
+    </li>
+    <li class="flex items-start qc-item p-3 rounded-lg">
+        <i class="fas fa-info-circle qc-tick mt-1 mr-3 text-lg"></i>
+        <span class="input-label font-medium">Upload an image and click Analyze</span>
+    </li>
+    <li class="flex items-start qc-item p-3 rounded-lg">
+        <i class="fas fa-info-circle qc-tick mt-1 mr-3 text-lg"></i>
+        <span class="input-label font-medium">All results from actual ML inference</span>
+    </li>
+</ul>
                                 <div class="qc-summary p-4 rounded-lg border mt-4">
                                     <h6 class="font-semibold qc-summary-text mb-2 flex items-center">
                                         <i class="fas fa-info-circle mr-2"></i>
@@ -734,18 +735,9 @@
                         <div class="p-6">
                             <pre id="jsonOutput" class="text-sm overflow-auto max-h-60 bg-gray-800 p-4 rounded-lg text-white">
 {
-    "sample_id": "1234",
-    "lat": 12.9716,
-    "lon": 77.5946,
-    "has_solar": true,
-    "confidence": 0.96,
-    "panel_count_est": 5,
-    "pv_area_sqm_est": 9.6,
-    "capacity_kw_est": 2,
-    "qc_status": "VERIFIABLE",
-    "qc_notes": ["clear roof view", "distinct module grid", "mounting shadows"],
-    "bbox_or_mask": "",
-    "image_metadata": {"source": "Satellite Imagery", "capture_date": "2023-10-15"}
+    "sample_id": "WAITING_FOR_ANALYSIS",
+    "message": "Upload an image and analyze to see actual ML model results",
+    "note": "All results will come from Roboflow ML model inference - no static data"
 }
                             </pre>
                             <button id="downloadJson" class="mt-4 primary-button text-white px-6 py-3 rounded-lg font-semibold transition w-full">
@@ -977,54 +969,74 @@
             }
         });
 
-        // AI Analysis Functions
-        analyzeLocationBtn.addEventListener('click', async () => {
-            const sampleId = document.getElementById('sampleId').value;
-            const latitude = document.getElementById('latitude').value;
-            const longitude = document.getElementById('longitude').value;
-            
-            if (!latitude || !longitude) {
-                alert('Please enter Latitude and Longitude');
-                return;
-            }
-            
-            // Show progress and disable button
-            analyzeLocationBtn.disabled = true;
-            analyzeLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Analyzing...';
-            
-            try {
-                // Show Solar Panel Detector title
-                solarPanelDetectorTitle.classList.remove('hidden');
-                
-                // Show results sections
-                resultsSections.classList.remove('hidden');
-                
-                // Scroll to results
-                setTimeout(() => {
-                    solarPanelDetectorTitle.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-                
-                // Generate mock results immediately (no loading time)
-                const mockResults = generateMockAnalysis(sampleId || 'AUTO_' + Date.now(), parseFloat(latitude), parseFloat(longitude));
-                
-                // Show results immediately
-                showAIAnalysisResults(mockResults);
-                
-                // Initialize 3D view
-                try {
-                    initializeSceneView(parseFloat(latitude), parseFloat(longitude));
-                } catch (error) {
-                    console.error('3D view initialization failed:', error);
-                }
-                
-            } catch (error) {
-                console.error('Analysis failed:', error);
-                alert('Analysis failed. Please try again.');
-            } finally {
-                analyzeLocationBtn.disabled = false;
-                analyzeLocationBtn.innerHTML = '<i class="fas fa-search mr-2"></i> Analyze Location';
-            }
+analyzeLocationBtn.addEventListener('click', async () => {
+    // Get input values
+    const sampleId = document.getElementById('sampleId').value;
+    const latitude = document.getElementById('latitude').value;
+    const longitude = document.getElementById('longitude').value;
+    
+    // Validation
+    if (!latitude || !longitude) {
+        alert('Please enter latitude and longitude');
+        return;
+    }
+    
+    // Show progress and disable button
+    analyzeLocationBtn.disabled = true;
+    analyzeLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Analyzing Location...';
+    
+    try {
+        // Show Solar Panel Detector title
+        solarPanelDetectorTitle.classList.remove('hidden');
+        
+        // Show results sections
+        resultsSections.classList.remove('hidden');
+        
+        // Scroll to results
+        setTimeout(() => {
+            solarPanelDetectorTitle.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+        
+        // Call ML model API endpoint with coordinates
+        const response = await fetch('/api/analyze-location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sample_id: sampleId || 'LOC_' + Date.now(),
+                latitude: parseFloat(latitude),
+                longitude: parseFloat(longitude)
+            })
         });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`API error: ${response.status} - ${errorText}`);
+        }
+
+        const mlResults = await response.json();
+        
+        // Show ACTUAL results from ML model
+        showAIAnalysisResults(mlResults);
+        
+        // Initialize 3D view if coordinates available
+        if (mlResults.lat && mlResults.lon) {
+            try {
+                initializeSceneView(parseFloat(mlResults.lat), parseFloat(mlResults.lon));
+            } catch (error) {
+                console.error('3D view initialization failed:', error);
+            }
+        }
+        
+    } catch (error) {
+        console.error('Analysis failed:', error);
+        alert('Analysis failed: ' + error.message + '. Please check if the API endpoint is available.');
+    } finally {
+        analyzeLocationBtn.disabled = false;
+        analyzeLocationBtn.innerHTML = '<i class="fas fa-search mr-2"></i> Analyze Location';
+    }
+});
 
         // View Detailed Results Button
 viewDetailedResultsBtn.addEventListener('click', () => {
@@ -1076,146 +1088,132 @@ newAnalysisBtn.addEventListener('click', () => {
             alert('Results saved to database successfully!');
         });
 
-        // Generate realistic mock analysis data
-        function generateMockAnalysis(sampleId, latitude, longitude) {
-            const hasSolar = Math.random() > 0.4;
-            const confidence = hasSolar ? (0.85 + Math.random() * 0.12) : (0.65 + Math.random() * 0.25);
-            const panelCount = hasSolar ? Math.floor(4 + Math.random() * 20) : 0;
-            const pvArea = hasSolar ? Math.round((panelCount * 1.65 + Math.random() * 1.8) * 10) / 10 : 0;
-            const capacity = hasSolar ? Math.round((pvArea * 0.21) * 10) / 10 : 0;
-            
-            // Determine QC status
-            let qcStatus, qcNotes;
-            if (hasSolar) {
-                qcStatus = Math.random() > 0.15 ? "VERIFIABLE" : "PARTIALLY_VERIFIABLE";
-                qcNotes = [
-                    "Clear roof view within 1200 sq.ft radius",
-                    "Distinct solar module patterns detected",
-                    "Consistent panel alignment and spacing"
-                ];
-                if (qcStatus === "PARTIALLY_VERIFIABLE") {
-                    qcNotes = [
-                        "Clear roof view within search radius",
-                        "Partial obstruction detected at edges",
-                        "Recommend manual verification"
-                    ];
-                }
-            } else {
-                qcStatus = Math.random() > 0.2 ? "NO_SOLAR_DETECTED" : "NOT_VERIFIABLE";
-                qcNotes = [
-                    "No solar panel signatures found",
-                    "Clear rooftop visibility in scanned area",
-                    "No obstructions detected"
-                ];
-                if (qcStatus === "NOT_VERIFIABLE") {
-                    qcNotes = [
-                        "Heavy shadow/cloud cover in area",
-                        "Possible obstructions limiting visibility",
-                        "Recommend retry with different imagery"
-                    ];
-                }
-            }
-            
-            // Generate random capture date
-            const randomDaysAgo = Math.floor(1 + Math.random() * 30);
-            const captureDate = new Date();
-            captureDate.setDate(captureDate.getDate() - randomDaysAgo);
-            
-            return {
-                "sample_id": sampleId,
-                "lat": latitude,
-                "lon": longitude,
-                "has_solar": hasSolar,
-                "confidence": Math.round(confidence * 100) / 100,
-                "panel_count_est": panelCount,
-                "pv_area_sqm_est": pvArea,
-                "capacity_kw_est": capacity,
-                "qc_status": qcStatus,
-                "qc_notes": qcNotes,
-                "scan_radius": "1200 sq.ft",
-                "bbox_or_mask": "",
-                "image_metadata": {
-                    "source": "Sentinel-2 Satellite Imagery",
-                    "resolution": "10m/pixel",
-                    "capture_date": captureDate.toISOString().split('T')[0],
-                    "cloud_cover": Math.round(Math.random() * 0.3 * 100) / 100
-                },
-                "analysis_timestamp": new Date().toISOString()
-            };
+        // Function to generate QC notes based on actual model results
+function generateQCNotes(mlResults) {
+    const qcNotes = [];
+    
+    if (mlResults.has_solar) {
+        qcNotes.push("Solar panels detected by ML model");
+        if (mlResults.confidence > 0.8) {
+            qcNotes.push("High confidence detection");
+        } else if (mlResults.confidence > 0.6) {
+            qcNotes.push("Moderate confidence detection");
         }
-
-        function showAIAnalysisResults(results) {
-            // Initialize 3D satellite view
-            try {
-                initializeSceneView(results.lat, results.lon);
-            } catch (error) {
-                console.error('3D view initialization failed:', error);
-            }
-            
-            // Update the UI with results
-            document.getElementById('hasSolarResult').textContent = results.has_solar ? "Yes" : "No";
-            document.getElementById('hasSolarResult').className = results.has_solar ? "value-display status-verified" : "value-display status-not-verified";
-            
-            document.getElementById('confidenceResult').textContent = results.confidence;
-            document.getElementById('panelCountResult').textContent = results.panel_count_est;
-            document.getElementById('pvAreaResult').textContent = `${results.pv_area_sqm_est} m²`;
-            document.getElementById('capacityResult').textContent = `${results.capacity_kw_est} kW`;
-            document.getElementById('qcStatusResult').textContent = results.qc_status;
-            
-            // Set QC status color
-            if (results.qc_status === "VERIFIABLE") {
-                document.getElementById('qcStatusResult').className = "value-display status-verified";
-            } else if (results.qc_status === "PARTIALLY_VERIFIABLE") {
-                document.getElementById('qcStatusResult').className = "value-display status-partial";
-            } else {
-                document.getElementById('qcStatusResult').className = "value-display status-not-verified";
-            }
-            
-            // Update QC notes (limited to 3 points)
-            const qcNotesList = document.getElementById('qcNotesList');
-            qcNotesList.innerHTML = '';
-            
-            // Take only first 3 notes
-            const limitedNotes = results.qc_notes.slice(0, 3);
-            limitedNotes.forEach(note => {
-                const li = document.createElement('li');
-                li.className = 'flex items-start qc-item p-3 rounded-lg';
-                li.innerHTML = `
-                    <i class="fas fa-check-circle qc-tick mt-1 mr-3 text-lg"></i>
-                    <span class="input-label font-medium">${note}</span>
-                `;
-                qcNotesList.appendChild(li);
-            });
-            
-            // Update JSON output
-            document.getElementById('jsonOutput').textContent = JSON.stringify(results, null, 2);
-            
-            // Update analysis preview
-            const analysisPreview = document.getElementById('analysisPreview');
-            analysisPreview.innerHTML = `
-                <div class="text-center w-full">
-                    <div class="p-6 rounded-lg inline-block max-w-full">
-                        <i class="fas ${results.has_solar ? 'fa-solar-panel' : 'fa-times-circle'} text-5xl mb-4" style="color: var(--text-primary);"></i>
-                        <p class="font-bold text-xl mb-4" style="color: var(--text-primary);">Satellite Scan Results</p>
-                        <div class="mt-4 space-y-2">
-    <p class="font-medium input-label">Location: ${results.lat.toFixed(4)}, ${results.lon.toFixed(4)}</p>
-    <p class="font-medium input-label">Scan Radius: ${results.scan_radius}</p>
-    <p class="font-medium input-label">Detection: ${results.has_solar ? 'Solar panels found' : 'No solar panels detected'}</p>
-    <p class="font-medium input-label">Confidence: ${(results.confidence * 100).toFixed(1)}%</p>
-    <p class="font-medium input-label">Imagery: ${results.image_metadata.source}</p>
-</div>
-${results.has_solar ? 
-    `<div class="mt-4 p-3">
-        <p class="text-sm font-semibold" style="color: var(--text-primary);">✓ Solar installation verified within ${results.scan_radius} radius</p>
-    </div>` : 
-    `<div class="mt-4 p-3">
-        <p class="text-sm font-semibold" style="color: var(--text-primary);">No solar panels detected in scanned area</p>
-    </div>`
+        
+        if (mlResults.panel_count_est > 0) {
+            qcNotes.push(`Estimated ${mlResults.panel_count_est} solar panels`);
+        }
+        
+        if (mlResults.qc_status === "VERIFIABLE") {
+            qcNotes.push("Image quality sufficient for verification");
+        } else if (mlResults.qc_status === "PARTIALLY_VERIFIABLE") {
+            qcNotes.push("Partial visibility - manual verification recommended");
+        }
+    } else {
+        qcNotes.push("No solar panels detected in uploaded image");
+        if (mlResults.confidence > 0.7) {
+            qcNotes.push("High confidence no solar panels present");
+        } else {
+            qcNotes.push("Image may need manual review");
+        }
+    }
+    
+    return qcNotes;
 }
-                    </div>
-                </div>
-            `;
+
+function showAIAnalysisResults(mlResults) {
+    // Update the UI with ACTUAL model results
+    document.getElementById('hasSolarResult').textContent = mlResults.has_solar ? "Yes" : "No";
+    
+    // Set status colors based on actual detection
+    if (mlResults.has_solar) {
+        if (mlResults.confidence > 0.7) {
+            document.getElementById('hasSolarResult').className = "value-display status-verified";
+        } else {
+            document.getElementById('hasSolarResult').className = "value-display status-partial";
         }
+    } else {
+        document.getElementById('hasSolarResult').className = "value-display status-no-solar";
+    }
+    
+    // Update confidence
+    document.getElementById('confidenceResult').textContent = mlResults.confidence ? mlResults.confidence.toFixed(3) : "N/A";
+    
+    // Update panel count
+    document.getElementById('panelCountResult').textContent = mlResults.panel_count_est || mlResults.panel_count || mlResults.detection_count || 0;
+    
+    // Update PV area
+    const pvArea = mlResults.pv_area_sqm_est || mlResults.pv_area || 0;
+    document.getElementById('pvAreaResult').textContent = pvArea ? `${pvArea.toFixed(1)} m²` : "N/A";
+    
+    // Update capacity
+    const capacity = mlResults.capacity_kw_est || mlResults.capacity || 0;
+    document.getElementById('capacityResult').textContent = capacity ? `${capacity.toFixed(2)} kW` : "N/A";
+    
+    // Update QC status
+    document.getElementById('qcStatusResult').textContent = mlResults.qc_status || "ANALYZED";
+    
+    // Set QC status color
+    if (mlResults.qc_status === "VERIFIABLE") {
+        document.getElementById('qcStatusResult').className = "value-display status-verified";
+    } else if (mlResults.qc_status === "PARTIALLY_VERIFIABLE") {
+        document.getElementById('qcStatusResult').className = "value-display status-partial";
+    } else if (mlResults.qc_status === "NO_SOLAR_DETECTED") {
+        document.getElementById('qcStatusResult').className = "value-display status-no-solar";
+    } else {
+        document.getElementById('qcStatusResult').className = "value-display status-not-verified";
+    }
+    
+    // Update QC notes with actual results
+    const qcNotesList = document.getElementById('qcNotesList');
+    qcNotesList.innerHTML = '';
+    
+    // Generate QC notes based on actual model results
+    const qcNotes = generateQCNotes(mlResults);
+    
+    qcNotes.forEach(note => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start qc-item p-3 rounded-lg';
+        li.innerHTML = `
+            <i class="fas fa-check-circle qc-tick mt-1 mr-3 text-lg"></i>
+            <span class="input-label font-medium">${note}</span>
+        `;
+        qcNotesList.appendChild(li);
+    });
+    
+    // Update JSON output with actual results
+    document.getElementById('jsonOutput').textContent = JSON.stringify(mlResults, null, 2);
+    
+    // Update analysis preview with actual results
+    const analysisPreview = document.getElementById('analysisPreview');
+    analysisPreview.innerHTML = `
+        <div class="text-center w-full">
+            <div class="p-6 rounded-lg inline-block max-w-full">
+                <i class="fas ${mlResults.has_solar ? 'fa-solar-panel' : 'fa-times-circle'} text-5xl mb-4" style="color: ${mlResults.has_solar ? '#10b981' : '#ef4444'};"></i>
+                <p class="font-bold text-xl mb-4" style="color: var(--text-primary);">ML Model Analysis Results</p>
+                <div class="mt-4 space-y-2">
+                    <p class="font-medium input-label">Location: ${mlResults.lat ? mlResults.lat.toFixed(4) : 'N/A'}, ${mlResults.lon ? mlResults.lon.toFixed(4) : 'N/A'}</p>
+                    <p class="font-medium input-label">Analysis Method: ${mlResults.model_used || 'Roboflow ML Model'}</p>
+                    <p class="font-medium input-label">Detection: ${mlResults.has_solar ? 'Solar panels detected' : 'No solar panels detected'}</p>
+                    <p class="font-medium input-label">Confidence: ${mlResults.confidence ? (mlResults.confidence * 100).toFixed(1) + '%' : 'N/A'}</p>
+                    <p class="font-medium input-label">Panels Found: ${mlResults.panel_count_est || mlResults.detection_count || 0}</p>
+                </div>
+                ${mlResults.has_solar ? 
+                    `<div class="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <p class="text-sm font-semibold text-green-700 dark:text-green-300">✓ Solar panels detected with ${mlResults.confidence ? (mlResults.confidence * 100).toFixed(1) : 'high'}% confidence</p>
+                    </div>` : 
+                    `<div class="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">No solar panels detected in the analyzed image</p>
+                    </div>`
+                }
+                <div class="mt-4 text-xs text-gray-500 dark:text-gray-400">
+                    <p><i class="fas fa-info-circle mr-1"></i> Results are from actual ML model inference</p>
+                    <p><i class="fas fa-clock mr-1"></i> Timestamp: ${new Date().toLocaleString()}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
         // Map Functions
         function initializeMap() {
