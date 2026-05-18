@@ -1,0 +1,142 @@
+# React Conversion — PM Surya Ghar Yojana
+
+> Full Vite + React + TypeScript + TailwindCSS conversion of `solar_app_v4`
+
+---
+
+## ✅ Verification
+
+Both screenshots confirm pixel-perfect rendering:
+
+![Home Page](file:///C:/Users/Aarthy/.gemini/antigravity/brain/1f657fe1-08b4-4422-aefa-24fe191f8ace/home_page_top_1772373463140.png)
+
+![Process Page](file:///C:/Users/Aarthy/.gemini/antigravity/brain/1f657fe1-08b4-4422-aefa-24fe191f8ace/process_page_1772373692234.png)
+
+---
+
+## 📁 Full Folder Structure
+
+```
+solar_app_v4/
+├── app.py                        ← Flask backend (unchanged)
+├── templates/                    ← Original HTML templates (unchanged)
+│
+└── react_frontend/               ← ✨ NEW React app
+    ├── index.html                ← Root HTML with ArcGIS CDN + Font Awesome
+    ├── vite.config.ts            ← Vite + Tailwind v4 + Flask proxy
+    ├── tsconfig.json
+    ├── tsconfig.app.json
+    ├── package.json
+    │
+    └── src/
+        ├── main.tsx              ← React entry point
+        ├── App.tsx               ← BrowserRouter + 5 routes + shared layout
+        ├── index.css             ← All CSS custom properties, animations, component styles
+        │
+        ├── types/
+        │   └── index.ts          ← All TypeScript interfaces
+        │
+        ├── hooks/
+        │   └── useDarkMode.ts    ← localStorage + OS preference dark mode hook
+        │
+        ├── components/
+        │   ├── Header.tsx        ← Blue gradient header + solar circuit + nav
+        │   ├── Footer.tsx        ← Footer with brand + links + scheme details
+        │   └── DarkModeToggle.tsx ← Fixed floating moon/sun button
+        │
+        └── pages/
+            ├── Home.tsx          ← Hero + carousel + AI CTA + quick actions
+            ├── AIAnalysis.tsx    ← ArcGIS map + 3D scene + Roboflow API + results
+            ├── SubsidyCalculator.tsx ← Slider + dropdown + live calc
+            ├── Process.tsx       ← 6-step flowchart with connectors
+            └── Contact.tsx       ← Formspree form + Ably live chat
+```
+
+---
+
+## 🚀 How to Run
+
+### 1. Start Flask backend (unchanged)
+```bash
+# In solar_app_v4/
+python app.py
+# Runs on http://localhost:5000
+```
+
+### 2. Start React frontend
+```bash
+cd react_frontend
+npm install     # already done
+npm run dev     # runs on http://localhost:5173
+```
+
+> API calls to `/api/*` are **proxied** to `localhost:5000` via [vite.config.ts](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/vite.config.ts) — no CORS issues.
+
+---
+
+## 🔄 Conversion Map
+
+| Original | React Equivalent |
+|---|---|
+| [index.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/index.html) | [pages/Home.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/Home.tsx) |
+| [AIPSI.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html) | [pages/AIAnalysis.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/AIAnalysis.tsx) |
+| [Subsidy.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/Subsidy.html) | [pages/SubsidyCalculator.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/SubsidyCalculator.tsx) |
+| [process.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/process.html) | [pages/Process.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/Process.tsx) |
+| [contact.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/contact.html) | [pages/Contact.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/Contact.tsx) |
+| [header.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/header.html) (XHR loaded) | [components/Header.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/components/Header.tsx) |
+| [footer.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/footer.html) (XHR loaded) | [components/Footer.tsx](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/components/Footer.tsx) |
+| `localStorage` dark mode | [hooks/useDarkMode.ts](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/hooks/useDarkMode.ts) |
+| CSS custom properties | [src/index.css](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/index.css) (preserved as-is) |
+| `document.getElementById` | `useState` / `useRef` |
+| Inline event handlers | React [onClick](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/pages/AIAnalysis.tsx#214-230), `onChange`, `onFocus` |
+| `XMLHttpRequest` for API | [fetch()](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html#1383-1420) with `async/await` |
+| ArcGIS `require()` AMD | CDN script in [index.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/index.html) + `declare global { const require }` |
+| Ably `new Ably.Realtime()` | `ably` npm package + `useRef` for instance |
+
+---
+
+## 🛠 Tech Stack
+
+| Tool | Version | Purpose |
+|---|---|---|
+| React | 19.x | UI framework |
+| Vite | 7.x | Build system + dev server |
+| TypeScript | 5.9 | Strict typing |
+| TailwindCSS | 4.x | Utility classes (`@tailwindcss/vite` plugin) |
+| react-router-dom | 7.x | Client-side routing |
+| ably | 2.x | Real-time live chat |
+| ArcGIS JS API | 4.30 (CDN) | 2D map + 3D SceneView |
+
+---
+
+## ⚙️ Key Design Decisions
+
+### ArcGIS via CDN (not npm)
+ArcGIS 4.x uses its own AMD module loader which conflicts with Vite's ESM bundler. The original app loaded it via `<script>` — we preserve this exactly. The `declare global { const require }` type declaration makes TypeScript accept this without any `any` suppression.
+
+### CSS Custom Properties Preserved
+Rather than converting ALL `var(--xxx)` tokens to Tailwind config values, we keep the CSS custom property system intact in [index.css](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/src/index.css). This ensures the dark mode toggle works identically — adding/removing `dark-mode` from `<body>` updates all properties at once, exactly as the original.
+
+### Tailwind v4 `@import "tailwindcss"`
+Tailwind v4 uses the new `@import` syntax instead of `@tailwind base/components/utilities` directives.
+
+### Flask Proxy
+The [vite.config.ts](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/react_frontend/vite.config.ts) proxy ensures `/api/*`, `/samples`, and `/sample/*` requests go to the Flask backend at `localhost:5000` during development — no CORS headers needed.
+
+---
+
+## 🎯 What's Preserved Identically
+
+- ✅ All animations (float, glowPulse, colorShift, technoSweep, rocket thrust)
+- ✅ Dark mode (localStorage + OS preference + body class toggle)
+- ✅ Benefit carousel auto-rotation + dot navigation
+- ✅ ArcGIS satellite map with click-to-select and geocoding
+- ✅ ArcGIS 3D SceneView with altitude/tilt readout and scene controls
+- ✅ Roboflow API call flow (`/api/analyze-location`)
+- ✅ JSON download, save-to-database, new-analysis reset
+- ✅ Subsidy live calculation formula (state multipliers)
+- ✅ Formspree form submission + success/error messages
+- ✅ Ably real-time chat, history loading, username in localStorage
+- ✅ 6-step flowchart with animated arrow connectors
+- ✅ All responsive breakpoints (md, lg grid layouts)
+- ✅ Floating home button with pulse-glow animation

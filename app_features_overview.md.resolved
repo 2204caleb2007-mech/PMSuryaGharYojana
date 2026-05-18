@@ -1,0 +1,343 @@
+# PM Surya Ghar Yojana – App Feature Overview (`solar_app_v4`)
+
+> A full breakdown of every feature in the application, organized by page and backend layer.
+
+---
+
+## 🏠 1. Home Page (`/` → [index.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/index.html))
+
+### Hero Section
+- **Full-screen background image** that changes between a day image (light mode) and a night/solar image (dark mode) with a smooth fade-out/fade-in transition.
+- **Centered overlay box** (glassmorphism effect with backdrop blur) containing the headline *"Powering India's Solar Revolution"*.
+- A **"View Features"** button that smoothly scrolls the user down to the content sections.
+
+### Dark / Light Mode Toggle
+- A **fixed floating button** (top-right corner, moon/sun icon) lets users toggle between dark and light modes.
+- The chosen preference is **saved to `localStorage`** and persists across page visits and page refreshes.
+- Both the background photo and all UI colours adapt instantly.
+- In dark mode, the main headings get a **cyan animated glowing gradient** effect; in light mode they are a solid navy blue.
+
+### About PM Surya Ghar Yojana Section
+Describes the national scheme with four bold bullet points:
+- Mission: free electricity for 1 crore households.
+- ₹75,000 crore government investment.
+- Need for a reliable verification system.
+- Challenge of scaling traditional field inspections.
+
+### Benefits Carousel (right of the About section)
+An **auto-rotating carousel** with dot-navigation showing 6 benefit cards:
+1. For Residential Users – subsidies up to ₹78,000
+2. For Commercial Users – accelerated depreciation & tax benefits
+3. Free Electricity – reduce bills significantly
+4. Income Opportunity – sell excess power back to the grid
+5. Substantial Subsidies – up to 60% on installation costs
+6. Green Energy – contribute to India's renewable goals
+
+Each card uses a **glassmorphism glow-box** style with an appropriate icon and a hover lift animation.
+
+### AI-Powered Solar Analysis CTA
+A highlighted box with animated amber gradient background, describing the AI verification system. A **"Start AI Analysis"** button with a rocket icon and a launch animation (shimmer + thrust effect) redirects to `/ai-analysis`.
+
+### Quick Actions Section
+Two action boxes side-by-side:
+- **Subsidy Calculator** – links to the `/subsidy` page.
+- **Application Flowchart** – links to the `/process` page.
+
+Both cards have a hover lift effect and are styled with a green/blue glassmorphism background respectively.
+
+---
+
+## 🤖 2. AI-Powered Solar Analysis Page (`/ai-analysis` → [AIPSI.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html))
+
+This is the core feature page of the app. It uses **ArcGIS JS API 4.30** for mapping and the **Roboflow cloud ML model** for solar panel detection.
+
+### Input Data Panel
+- **Sample ID** – auto-generated (read-only).
+- **Latitude / Longitude** manual input fields.
+- **Search Buffer** – fixed at 1200 sq.ft radius (read-only).
+- **CSV Upload (optional)** – upload a `.csv` file with [sample_id](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/app.py#160-162), `latitude`, `longitude` columns for batch processing.
+- **"Use Selected Location"** button – transfers coordinates from the map to the input fields.
+- **"Analyze Location"** button – triggers the backend API call to fetch satellite imagery and run Roboflow inference.
+
+### Interactive Map (Select Location Panel)
+- Full **ArcGIS/Esri World Imagery** map embedded directly in the page.
+- A **search bar** with live autocomplete suggestions (geocoding) overlaid on the map.
+- Click anywhere on the map to place a marker and **automatically populate the lat/lon fields**.
+- Below the map: **Selected Latitude**, **Selected Longitude**, and **Address** display fields that update in real time.
+
+### Analysis Results Panel (shown after analysis)
+Appears once the user clicks "Analyze Location". Shows:
+- **Solar Panels Detected** (Yes/No with colour coding: green = verified, red = not verified)
+- **Estimated Panel Count**
+- **Confidence Score** (0.000–1.000)
+- **Estimated PV Area**
+- **Estimated Capacity** (kW)
+- **QC Status** (VERIFIED / PARTIAL / PENDING)
+
+### 3D Satellite View Panel (shown after analysis)
+- An **ArcGIS 3D SceneView** renders the selected location with photorealistic World Imagery tiles.
+- Displays **real 3D building models** (where available).
+- Live **Altitude** and **Tilt** readouts in the corner.
+- Three scene control buttons:
+  - 🧭 **Compass / Reset North**
+  - 🏠 **Reset View** (zoom back to the location)
+  - ↩ **Reset Tilt**
+- Metadata fields below: Imagery Source (*World Imagery*), Resolution (*30 cm*), 3D Buildings (*Enabled*).
+
+### Detailed Results Section
+Shown when the user clicks **"View Detailed Results / Download Results"**:
+
+#### Analysis Summary (3-column grid)
+| Column 1 | Column 2 | Column 3 |
+|---|---|---|
+| Solar Panels Detected | Confidence Score | Estimated Capacity |
+| Estimated Panel Count | Estimated PV Area | QC Status |
+
+#### Quality Control Notes
+- Bullet list of QC checks returned by the model.
+- A summary paragraph about the scan quality.
+
+#### JSON Output
+- A dark-themed `<pre>` block showing the **raw JSON** returned by the Roboflow API.
+- A **"Download JSON"** button to save the result as a `.json` file.
+
+#### Action Buttons
+- **"New Analysis"** – resets the UI to start fresh.
+- **"Save to Database"** – posts the result to the `/api/save-analysis` backend endpoint.
+
+---
+
+## 💰 3. Subsidy Calculator (`/subsidy` → [Subsidy.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/Subsidy.html))
+
+### Interactive Slider Calculator
+- **System Capacity slider** – range 1 kW to 10 kW (default 3 kW).
+- **State dropdown** – Delhi, Maharashtra, Karnataka, Tamil Nadu, Gujarat.
+- Subsidy is **recalculated live** as the slider or state selection changes.
+- Formula used:
+  - ≤ 3 kW → ₹14,588 per kW
+  - > 3 kW → ₹14,588 × 3 + ₹7,294 × (capacity − 3)
+  - Multiplied by a state-level factor (e.g., 0.90 for Karnataka).
+- **Estimated Subsidy Range** displayed in a prominent blue banner (e.g., *₹32,000 – ₹36,000*).
+
+### Subsidy Information Section
+Two-column layout:
+
+**Eligibility Criteria**
+- Residential consumers only
+- Valid electricity connection required
+- Suitable rooftop required
+- System capacity within a defined range
+
+**Subsidy Rate Table**
+| Capacity | Rate |
+|---|---|
+| Up to 3 kW | ₹14,588 per kW |
+| Above 3 kW | ₹7,294 per kW |
+| Maximum | 10 kW |
+
+> Note: These figures are labelled *"to be approved yet"* in the UI.
+
+### Floating Home Button
+A pulsing blue circular button (bottom-right) that navigates back to the home page.
+
+---
+
+## 📋 4. Application Process / How It Works (`/process` → [process.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/process.html))
+
+A **6-step vertical flowchart** with animated step connectors (lines + arrows between each step).
+
+| Step | Icon | Title | Description |
+|---|---|---|---|
+| 01 | 📍 | Select Location on Map | Choose location via map click or search. Coordinates auto-filled with address display. |
+| 02 | 🎯 | Use Selected Coordinates | Transfer lat/long to input fields. Sample ID generated automatically from coordinates. |
+| 03 | 🔍 | Initiate AI Analysis | Start analysis with 1200 sq.ft radius scan. AI processes satellite imagery automatically. |
+| 04 | 🛰️ | View 3D Satellite Results | Interactive 3D view with controls. Altitude, tilt, and imagery details displayed. |
+| 05 | 📊 | Review Analysis Summary | Panel detection, count, area, capacity results. Confidence score and QC status shown. |
+| 06 | 💾 | Download / Save Results | Download JSON report or save to database. Start new analysis or view details. |
+
+Each step card has:
+- A numbered badge in the top-left corner.
+- A blue left-border accent.
+- A hover lift animation.
+- A connecting line + arrow pointing to the next step.
+
+A **"Start Analysis Now"** button at the bottom redirects to [AIPSI.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html).
+
+---
+
+## 📬 5. Contact Page (`/contact` → [contact.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/contact.html))
+
+### Contact Form
+Fields: First Name, Last Name, Email Address, Contact Number, Message (non-resizable textarea). Submitted to **Formspree** (`POST https://formspree.io/f/xwpgqryb`) via [fetch()](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html#1383-1420).
+- Shows a **loading spinner** while submitting.
+- Shows a **green success** or **red error** message after submission.
+- On success (after 1.5 s), the contact info box on the right column **slides out** and is replaced by the Live Chat.
+
+### Contact Information Box (right column, initial state)
+- Office address, helpline, email, and working hours (all marked *"to be updated yet"*).
+- A **"Chat with us (live)"** button that launches the Ably live chat directly.
+
+### Live Chat (Ably Realtime)
+- Powered by the **Ably Realtime SDK**.
+- Channel: `solar-expert-chat`.
+- Features:
+  - Random username auto-assigned and saved in `localStorage` (e.g., `User472`).
+  - **Message history** – loads the last 20 messages on join.
+  - **Real-time message delivery** – all connected users see new messages instantly.
+  - Messages are styled differently for **sent** (right-aligned, dark blue), **received** (left-aligned, dark grey), and **system** (centred, italic) messages.
+  - System messages indicate connection status (connected / failed).
+
+---
+
+## 🔧 6. Backend – Flask API ([app.py](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/app.py))
+
+The app runs on **Flask** (Python), serving both HTML templates and a REST API.
+
+### Template Routes
+
+| Route | Template |
+|---|---|
+| `GET /` | [index.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/index.html) |
+| `GET /ai-analysis` | [AIPSI.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/AIPSI.html) |
+| `GET /subsidy` | [Subsidy.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/Subsidy.html) |
+| `GET /process` | [process.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/process.html) |
+| `GET /contact` | [contact.html](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/templates/contact.html) |
+
+### API Endpoints
+
+#### ML / Detection
+| Method & Route | Purpose |
+|---|---|
+| `POST /api/analyze-image` | Upload an image file → run Roboflow inference → return detection results (panel count, confidence, bounding boxes) |
+| `POST /api/analyze-location` | Send lat/lon → fetch Esri satellite tile → run Roboflow inference → return detection results |
+| `POST /api/annotate-image` | Upload an image → run local model → return annotated image with bounding boxes |
+
+#### Subsidy
+| Method & Route | Purpose |
+|---|---|
+| `POST /api/subsidy` | Given a [sample_id](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/app.py#160-162) (from a previous analysis), calculate and return a subsidy range in INR |
+
+#### Data / Results
+| Method & Route | Purpose |
+|---|---|
+| `POST /api/upload-csv` | Upload a CSV of image paths → batch-run inference → return results |
+| `POST /api/save-analysis` | Save analysis JSON result to disk and in-memory store |
+| `GET /api/download-results/<id>` | Download the JSON result for a given sample ID |
+| `GET /samples` | List all analysis results in the current session |
+| `GET /sample/<sample_id>` | Retrieve a specific analysis result |
+| `GET /api/health` | Health check – returns model connectivity status and session statistics |
+
+---
+
+## 🤖 7. ML / Roboflow Integration
+
+### Cloud Inference (Primary)
+- Uses the **Roboflow REST API** (`https://api.roboflow.com/infer/<model_id>`).
+- Model: `custom-workflow-object-detection-tgnqc-af4gr/1` (custom-trained solar panel detector).
+- Workflow:
+  1. Download satellite image from the Esri tile URL.
+  2. Base64-encode the image.
+  3. POST to Roboflow API with the encoded image and API key.
+  4. Parse predictions (class, confidence, bounding box x/y/width/height).
+
+### Optional Local Inference (Fallback)
+- A **RetinaNet** (ResNet-50 FPN backbone) local model path is configured.
+- PyTorch, PIL/NumPy, and pycocotools are imported with **graceful fallback** if not installed.
+- Local model is not loaded by default — the cloud model takes priority.
+
+### SolarAnalysisSystem Class
+An in-memory result store that:
+- Generates unique `SOLAR_XXXX` sample IDs.
+- Caches all analysis results by sample ID for later retrieval.
+- Provides a subsidy calculation method (capacity × state multiplier).
+
+---
+
+## 🎨 8. UI Design System
+
+### Color Modes
+Full **light/dark theming** via CSS custom properties. Both modes define:
+`--bg-primary`, `--bg-secondary`, `--text-primary`, `--text-secondary`, `--border-color`, `--header-bg`, `--accent-color`, `--input-bg`, `--input-text`, `--input-border`.
+
+### Typography
+`'Segoe UI', system-ui, sans-serif` throughout all pages.
+
+### Key Animations
+| Animation | Where Used |
+|---|---|
+| `float` (translateY up/down) | Solar panel icons in the header |
+| `colorShift` + `glowPulse` | Page headings in dark mode (cyan gradient) |
+| `pulsatingBorder` | Highlighted elements, animated borders |
+| `pulse` / `pulse-glow` | Floating home button |
+| `thrust` / `blurLine` | Rocket button on the home page |
+| Benefit carousel fade | Homepage benefits carousel |
+
+### Component Styles
+- **`glow-box`** – glassmorphism cards with blue gradient background.
+- **`quick-action-box`** – green glassmorphism cards.
+- **`ai-analysis-box`** – amber glassmorphism box.
+- **`analysis-card`** – clean card with border and hover lift.
+- **`primary-button`** / **`blue-button`** – consistent button styles across all pages.
+
+---
+
+## 🗂️ 9. Project Structure
+
+```
+solar_app_v4/
+├── app.py                  # Main Flask application (all routes & API)
+├── main.py                 # Entry point (calls app.run)
+├── config.yaml             # Roboflow & Google Maps API keys
+├── requirements.txt        # Python dependencies
+├── .env                    # Environment variables (secret keys)
+│
+├── templates/
+│   ├── index.html          # Home page
+│   ├── AIPSI.html          # AI Solar Analysis page
+│   ├── Subsidy.html        # Subsidy Calculator
+│   ├── process.html        # Application Process flowchart
+│   ├── contact.html        # Contact + Live Chat
+│   ├── header.html         # Shared navigation header (loaded via XHR)
+│   └── footer.html         # Shared footer (loaded via XHR)
+│
+├── static/
+│   ├── css/                # Stylesheets
+│   ├── js/
+│   │   ├── auth.js         # Authentication helpers
+│   │   └── app.js          # Main frontend logic
+│   └── annotated/          # Saved annotated images from detection
+│
+├── app/                    # (Legacy FastAPI app structure, currently unused)
+│   ├── models.py           # SQLAlchemy DB models
+│   ├── schemas.py          # Pydantic schemas
+│   ├── database.py         # DB config
+│   ├── dependencies.py     # FastAPI dependency injection
+│   ├── routers/            # auth.py, analysis.py route handlers
+│   ├── services/           # satellite.py service
+│   └── ml_models/          # solar_detector.py
+│
+├── data/                   # Uploaded CSVs, processed results, cache
+├── logs/                   # Application log files
+├── results/                # Analysis result files
+└── uploads/                # Uploaded images
+```
+
+---
+
+## 🔑 10. Configuration & Keys
+
+| Key | Used For |
+|---|---|
+| `ROBOFLOW_API_KEY` | Authenticates requests to the Roboflow inference API |
+| `ROBOFLOW_MODEL_ID` | Specifies the trained solar panel detection model |
+| `GOOGLE_MAPS_API_KEY` | Reserved for Google Maps integration (currently used Esri tiles) |
+| `ABLY_API_KEY` | Powers the real-time live chat on the Contact page |
+| Formspree endpoint | Handles contact form email submissions |
+
+---
+
+## ⚠️ Known Placeholders / Pending Items
+
+- Contact page: **Office address, helpline, email, working hours** are all placeholders (`"to be updated yet"`).
+- Subsidy rates are labelled *"to be approved yet"*.
+- The `app/` directory (FastAPI + PostgreSQL architecture from an earlier version) is present but **not actively used** — the current app runs purely through [app.py](file:///d:/All%20projects/PM%20Surya%20Ghar%20Yojana/1.%20prototypes/solar_app_v4/app.py) (Flask).

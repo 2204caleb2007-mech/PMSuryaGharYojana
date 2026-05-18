@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PM Surya Ghar Yojana - Solar Subsidy Scheme</title>
+  <meta name="description"
+    content="AI-powered solar panel verification and subsidy calculator for the PM Surya Ghar: Muft Bijli Yojana scheme." />
+
+  <!-- Font Awesome (same CDN as original) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- ArcGIS CSS (same version as AIPSI.html) -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css" id="arcgis-css" />
+
+  <!-- Google Identity Services (GSI) — for "Continue with Google" login -->
+  <!-- Loaded async so it never blocks the main app bundle -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!--
+      ArcGIS JS API 4.30 — loaded as a script tag because it provides
+      its own AMD `require` loader that React/Vite cannot bundle directly.
+      The AIAnalysis page uses `declare global { const require }` and calls
+      this after mount inside useEffect, mirroring the original behaviour.
+    -->
+  <script src="https://js.arcgis.com/4.30/"></script>
+
+  <!-- Google Maps JavaScript API -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%&libraries=maps3d&v=beta">
+  </script>
+</head>
+
+<body class="min-h-screen m-0 p-0">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
